@@ -1,0 +1,8 @@
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+mysql-connector-python==9.0.0
+pandas==2.2.2
+scikit-learn==1.5.1
+joblib==1.4.2
+azure-storage-blob==12.22.0
+azure-monitor-opentelemetry==1.6.1
