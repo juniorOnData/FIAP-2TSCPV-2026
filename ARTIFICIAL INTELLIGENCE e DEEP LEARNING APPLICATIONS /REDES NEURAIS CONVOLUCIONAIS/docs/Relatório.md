@@ -137,13 +137,9 @@ Sem BatchNorm, `lr=1e-3` (o mesmo da base) rendeu 86,46% — 1,7 pp abaixo do eq
 
 Este é o experimento que justifica a convolução: a CNN usa **3.216 parâmetros a menos** que o MLP e ainda assim acerta **4,6 pp a mais** no teste. O MLP gasta a maior parte do seu orçamento (100.352 parâmetros — quase o modelo inteiro da CNN) só na primeira camada, ligando cada um dos 784 pixels a cada um dos 128 neurônios ocultos, sem nenhuma noção de vizinhança espacial: um padrão de borda aprendido num canto da imagem não transfere para outro canto. A CNN aprende o mesmo tipo de padrão uma vez e reaplica em toda a imagem — daí acertar mais gastando menos.
 
-![Curvas de perda e acurácia do MLP baseline, 12 épocas](assets/mlp-curvas.png)
-
 Curvas do MLP: convergência mais rápida por época (menos computação por passo), mas platô mais baixo — evidência de menor capacidade representacional, não de falta de treino.
 
 ### 3.2 Matriz de confusão interpretada
-
-![Matriz de confusão normalizada por linha da linha de base no conjunto de teste](assets/fashion-mnist-confusao.png)
 
 Matriz de confusão da linha de base (10.000 imagens de teste), normalizada por linha.
 
@@ -156,8 +152,6 @@ Matriz de confusão da linha de base (10.000 imagens de teste), normalizada por 
 † 54 Botas→Tênis + 50 Tênis→Bota, lido diretamente da matriz.
 
 O padrão geral: os quatro piores F1 da linha de base (Camisa 0,66, Camiseta/Top 0,84, Casaco 0,84, Pulôver 0,86) formam um bloco quase fechado de confusão mútua — peças de tronco em tecido plano, sem textura de cor para ajudar. Calça, Bolsa e Sandália (F1 ≥ 0,96) quase nunca erram porque sua silhueta é distintiva mesmo em baixa resolução. A acurácia global de 89,58% esconde completamente essa estrutura — é por isso que a etapa de teste do pipeline original insiste em ir além da acurácia.
-
-![Os doze erros de maior confiança da linha de base no conjunto de teste](assets/fashion-mnist-erros.png)
 
 Os doze erros de maior confiança da linha de base — vários são peças de tronco ambíguas mesmo para um observador humano a 28×28 pixels.
 
@@ -174,11 +168,7 @@ O salto do modelo instável (+22,7 pp) é revelador: mesmo quando o treino não 
 
 ### 3.4 Visualização de filtros
 
-![Os 16 filtros 3x3 aprendidos na primeira convolução](assets/filtros-conv1.png)
-
 Os 16 filtros 3×3 da primeira convolução.
-
-![Mapas de ativação do primeiro bloco convolucional para uma imagem de teste da classe Camisa](assets/ativacoes-bloco1.png)
 
 Mapas de ativação do bloco 1 para uma imagem de teste da classe Camisa.
 
@@ -209,15 +199,9 @@ Mesma arquitetura (três blocos Conv→BatchNorm→ReLU→MaxPool, mesmo `canais
 
 Nenhuma linha de código do modelo mudou — só `config_para_dataset("CIFAR10")`. O tamanho do flatten (1.024, contra 576) foi descoberto pela mesma técnica empírica do `model.py` original (passar um tensor de zeros pelo extrator), exatamente o motivo pelo qual esse design existe: trocar de dataset não exigiu recalcular nada à mão.
 
-![Mosaico de imagens de treino do CIFAR-10, coloridas, com augmentation aplicado](assets/cifar10-mosaico.png)
-
 Mosaico de treino do CIFAR-10 após augmentation — note o quanto mais informação (cor, textura, fundo) cada imagem carrega frente ao Fashion-MNIST.
 
-![Curvas de perda e acurácia do modelo treinado no CIFAR-10, 15 épocas](assets/cifar10-curvas.png)
-
 Curvas de treino, 15 épocas — perda de validação ainda caindo no fim, sem sinal de overfitting.
-
-![Matriz de confusão normalizada por linha do modelo CIFAR-10 no conjunto de teste](assets/cifar10-confusao.png)
 
 Matriz de confusão do CIFAR-10.
 
