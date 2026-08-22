@@ -1,0 +1,15 @@
+{
+	"name": "adf-dw-rm562679",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "germanywestcentral",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "a72a359c-6513-46ee-ab9f-4b3264215f34",
+		"tenantId": "11dbbfe2-89b8-4549-be10-cec364e59551"
+	}
+}
