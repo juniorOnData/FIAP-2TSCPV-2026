@@ -1,4 +1,4 @@
-# Do pixel ao deploy: resolução completa dos exercícios de CNN
+# Resolução completa dos exercícios de CNN
 
 ## Visão geral
 
