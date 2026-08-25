@@ -1,4 +1,4 @@
-# Resolução dos exercícios (CheckPoint 1) | Redes Neurais Convolucionais na prática: Do dado ao deploy
+# Resolução dos exercícios (CheckPoint 1) | Redes Neurais Convolucionais na prática
 
 Projeto derivado de [`cnn/`](../cnn) para resolver **todos os exercícios de
 [`cnn/exercicios.md`](../cnn/exercicios.md)**, com o desafio final pelo
