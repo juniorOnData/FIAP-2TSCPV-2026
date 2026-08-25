@@ -47,12 +47,3 @@ python filtros_viz.py --tag baseline                 # 3.4
 python train.py --dataset CIFAR10 --tag cifar10_caminho_a --epocas 15   # Nível 4-A
 python evaluate.py --tag cifar10_caminho_a
 ```
-
-## Exercício 3.5 (fotos reais)
-
-Não executado nesta rodada por falta de fotos reais de roupas. O comando está
-pronto em `src/predict.py`:
-
-```bash
-python predict.py caminho/da/foto.jpg --tag baseline --inverter
-```
