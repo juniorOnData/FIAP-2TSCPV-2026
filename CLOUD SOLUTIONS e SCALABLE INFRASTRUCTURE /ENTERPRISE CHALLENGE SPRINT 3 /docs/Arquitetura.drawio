@@ -1,0 +1,223 @@
+<mxfile host="Electron" agent="NexusOps">
+  <diagram name="Arquitetura Cloud - Data Galaxy" id="arch-cloud-03">
+    <mxGraphModel dx="1664" dy="989" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=20;fontStyle=1;fontColor=#000000;" value="Data Galaxy: Arquitetura da Solução em Nuvem (Microsoft Azure) Locaweb" vertex="1">
+          <mxGeometry height="30" width="1560" x="40" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontColor=#000000;" value="Resource Group: rg-nexusops-locaweb — Região principal: Chile Central" vertex="1">
+          <mxGeometry height="24" width="1560" x="40" y="52" as="geometry" />
+        </mxCell>
+        <mxCell id="rg" parent="1" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;strokeColor=#0078D4;strokeWidth=2;fillColor=none;verticalAlign=top;align=left;spacingLeft=44;spacingTop=8;fontColor=#0078D4;fontSize=14;fontStyle=1;" value="Resource Group: rg-nexusops-locaweb" vertex="1">
+          <mxGeometry height="615" width="1130" x="270" y="95" as="geometry" />
+        </mxCell>
+        <mxCell id="regiao" parent="1" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;dashPattern=4 4;strokeColor=#999999;strokeWidth=2;fillColor=none;verticalAlign=top;align=left;spacingLeft=10;spacingTop=4;fontColor=#777777;fontSize=11;" value="Região: Chile Central" vertex="1">
+          <mxGeometry height="551" width="800" x="289" y="137" as="geometry" />
+        </mxCell>
+        <mxCell id="vnet" parent="1" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;dashPattern=6 6;strokeColor=#0078D4;strokeWidth=2;fillColor=none;verticalAlign=top;align=left;spacingLeft=40;spacingTop=8;fontColor=#0078D4;fontSize=13;fontStyle=1;" value="&amp;nbsp; &amp;nbsp; Virtual Network: vnet-nexusops (10.0.0.0/16)" vertex="1">
+          <mxGeometry height="372" width="584" x="486" y="161" as="geometry" />
+        </mxCell>
+        <mxCell id="subnetapp" parent="1" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;strokeColor=#82B366;fillColor=#F5FBF3;verticalAlign=top;align=left;spacingLeft=10;spacingTop=4;fontColor=#5B8C4A;fontSize=11;" value="subnet-app&#xa;10.0.1.0/24" vertex="1">
+          <mxGeometry height="298" width="279" x="499" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="subnetdata" parent="1" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;strokeColor=#82B366;fillColor=#F5FBF3;verticalAlign=top;align=left;spacingLeft=10;spacingTop=4;fontColor=#5B8C4A;fontSize=11;" value="subnet-data&#xa;10.0.2.0/24" vertex="1">
+          <mxGeometry height="300" width="250" x="800" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="iacbox" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;" value="" vertex="1">
+          <mxGeometry height="95" width="190" x="40" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="iactxt" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;" value="&lt;b&gt;Provisionamento IaC&lt;/b&gt;&lt;br&gt;Azure CLI&lt;br&gt;&lt;i&gt;deploy_azure.sh&lt;/i&gt;" vertex="1">
+          <mxGeometry height="60" width="121" x="101" y="127.5" as="geometry" />
+        </mxCell>
+        <mxCell id="fontesbox" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;" value="" vertex="1">
+          <mxGeometry height="95" width="190" x="40" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="fontestxt" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;" value="&lt;b&gt;1. Entrada de dados&lt;/b&gt;&lt;br&gt;Incidentes Locaweb&lt;br&gt;&lt;i&gt;incidentes.csv&lt;/i&gt;" vertex="1">
+          <mxGeometry height="60" width="118" x="98" y="313" as="geometry" />
+        </mxCell>
+        <mxCell id="modelobox" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;" value="" vertex="1">
+          <mxGeometry height="100" width="190" x="40" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="modelotxt" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=11;" value="&lt;b&gt;Modelo preditivo&lt;/b&gt;&lt;br&gt;modelo_incidentes.pkl" vertex="1">
+          <mxGeometry height="70" width="118" x="98" y="485" as="geometry" />
+        </mxCell>
+        <mxCell id="blobbox" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="" vertex="1">
+          <mxGeometry height="120.1" width="165" x="305" y="192.9" as="geometry" />
+        </mxCell>
+        <mxCell id="blobtxt" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;" value="&lt;b&gt;2. Azure Blob Storage&lt;/b&gt;&lt;br&gt;stnexusops8929&lt;br&gt;container &lt;i&gt;raw&lt;/i&gt;" vertex="1">
+          <mxGeometry height="55" width="155" x="310" y="245" as="geometry" />
+        </mxCell>
+        <mxCell id="acrbox" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="" vertex="1">
+          <mxGeometry height="120.1" width="252.59" x="326" y="549" as="geometry" />
+        </mxCell>
+        <mxCell id="acrtxt" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;" value="&lt;b&gt;3. Container Registry&lt;/b&gt;&lt;br&gt;acrnexusops8929no&lt;br&gt;&lt;i&gt;api-previsao:v1&lt;/i&gt;&lt;br&gt;————————&lt;br&gt;&lt;div&gt;&lt;font color=&quot;#B85450&quot;&gt;Região: Norway East&lt;br&gt;(ACR Tasks indisponível&lt;br&gt;em Chile Central na assinatura&amp;nbsp;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font color=&quot;#B85450&quot;&gt;Azure for Students)&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="155" x="408.75" y="579" as="geometry" />
+        </mxCell>
+        <mxCell id="acibox" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;" value="" vertex="1">
+          <mxGeometry height="230.5" width="220" x="528.5" y="269.5" as="geometry" />
+        </mxCell>
+        <mxCell id="acitxt" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;" value="&lt;b&gt;4. Container Instances&lt;/b&gt;&lt;br&gt;aci-nexusops-api porta 80" vertex="1">
+          <mxGeometry height="32" width="158.5" x="578.59" y="284.5" as="geometry" />
+        </mxCell>
+        <mxCell id="dockerbox" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#B1DDF0;strokeColor=#10739E;" value="" vertex="1">
+          <mxGeometry height="161" width="198" x="540" y="328" as="geometry" />
+        </mxCell>
+        <mxCell id="dockertxt" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;" value="&lt;b&gt;Container Docker&lt;/b&gt;&lt;br&gt;&lt;i&gt;(Dockerfile)&lt;/i&gt;&lt;br&gt;API de previsão&lt;br&gt;Python 3.11 + FastAPI&lt;br&gt;carrega o modelo .pkl&lt;br&gt;gera previsões D+1 / D+7" vertex="1">
+          <mxGeometry height="122" width="180" x="549" y="373.5" as="geometry" />
+        </mxCell>
+        <mxCell id="mysqlbox" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="" vertex="1">
+          <mxGeometry height="198.5" width="206" x="822" y="297" as="geometry" />
+        </mxCell>
+        <mxCell id="mysqltxt" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=10;" value="&lt;b&gt;5. Azure Database for MySQL&lt;/b&gt;&lt;br&gt;Flexible Server&lt;br&gt;mysql-nexusops-8929&lt;br&gt;&lt;i&gt;db_nexusops&lt;/i&gt;&lt;br&gt;————————&lt;br&gt;tb_incidentes&lt;br&gt;tb_previsoes&lt;br&gt;tb_log_execucao" vertex="1">
+          <mxGeometry height="120.1" width="177" x="836.5" y="362.5" as="geometry" />
+        </mxCell>
+        <mxCell id="monitorbox" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1D5E7;strokeColor=#9673A6;" value="" vertex="1">
+          <mxGeometry height="105" width="200" x="1140" y="137" as="geometry" />
+        </mxCell>
+        <mxCell id="monitortxt" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;" value="&lt;b&gt;6. Azure Monitor&lt;/b&gt;&lt;br&gt;métricas de CPU,&lt;br&gt;memória e rede" vertex="1">
+          <mxGeometry height="55" width="190" x="1145" y="173.5" as="geometry" />
+        </mxCell>
+        <mxCell id="aibox" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1D5E7;strokeColor=#9673A6;" value="" vertex="1">
+          <mxGeometry height="105" width="200" x="1141.93" y="276" as="geometry" />
+        </mxCell>
+        <mxCell id="aitxt" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;" value="&lt;b&gt;Application Insights&lt;/b&gt;&lt;br&gt;appi-nexusops&lt;br&gt;requests, falhas,&lt;br&gt;tempo de resposta" vertex="1">
+          <mxGeometry height="55" width="190" x="1146.93" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="lawbox" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1D5E7;strokeColor=#9673A6;" value="" vertex="1">
+          <mxGeometry height="105" width="200" x="1141.93" y="428" as="geometry" />
+        </mxCell>
+        <mxCell id="lawtxt" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;" value="&lt;b&gt;Log Analytics Workspace&lt;/b&gt;&lt;br&gt;law-nexusops&lt;br&gt;consultas KQL&lt;br&gt;logs do container" vertex="1">
+          <mxGeometry height="55" width="190" x="1148.0600000000002" y="474" as="geometry" />
+        </mxCell>
+        <mxCell id="saidabox" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="" vertex="1">
+          <mxGeometry height="165" width="180" x="1430" y="325" as="geometry" />
+        </mxCell>
+        <mxCell id="saidatxt" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;" value="&lt;b&gt;7. Saída&lt;/b&gt;&lt;br&gt;Previsões D+1 / D+7&lt;br&gt;————————&lt;br&gt;Endpoint /previsoes&lt;br&gt;Dashboards&lt;br&gt;Alertas operacionais" vertex="1">
+          <mxGeometry height="115" width="170" x="1435" y="369" as="geometry" />
+        </mxCell>
+        <mxCell id="legenda" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#B3B3B3;align=left;verticalAlign=top;spacingLeft=10;spacingTop=8;fontSize=11;fontColor=light-dark(#000000, #121212);" value="&lt;b&gt;Fluxo da solução:&lt;/b&gt; (1) os dados de incidentes da Locaweb são preparados em CSV e (2) carregados no Azure Blob Storage; (3) a imagem da aplicação, que embarca o modelo de Machine Learning, é construída e publicada no Azure Container Registry; (4) o Azure Container Instances executa a imagem como container Docker; a API lê os dados do Blob, persiste o histórico e (5) grava as previsões de incidentes no Azure Database for MySQL; (6) toda a execução é monitorada por Azure Monitor, Application Insights e Log Analytics; (7) as previsões ficam disponíveis via endpoint para dashboards e alertas às equipes de operação. Todo o provisionamento foi realizado via Azure CLI (Infrastructure as Code).&lt;br&gt;&lt;br&gt;&lt;b&gt;Nota:&lt;/b&gt; o Container Registry foi provisionado em Norway East porque o serviço ACR Tasks, responsável pelo build remoto da imagem, não está disponível em Chile Central. Ambos os recursos permanecem no mesmo Resource Group." vertex="1">
+          <mxGeometry height="130" width="1130" x="270" y="722" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="iacbox" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;dashed=1;strokeColor=#666666;endArrow=block;fontSize=11;" target="rg" value="provisiona">
+          <mxGeometry relative="1" x="0.5503" as="geometry">
+            <mxPoint y="1" as="offset" />
+            <Array as="points">
+              <mxPoint x="247" y="157.5" />
+              <mxPoint x="247" y="500" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="fontesbox" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#333333;fontSize=11;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="blobbox" value="upload">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="blobbox" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#333333;fontSize=11;" target="acibox" value="leitura dos dados">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="modelobox" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#333333;fontSize=11;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="acrbox" value="empacotado&#xa;na imagem">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="acrbox" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;dashed=1;strokeColor=#10739E;fontSize=11;fontColor=#10739E;" target="dockerbox" value="docker pull">
+          <mxGeometry relative="1" x="0.0007" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="dockerbox" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#D79B00;startArrow=block;endArrow=block;fontSize=11;labelBackgroundColor=none;" target="mysqlbox" value="&lt;font style=&quot;font-size: 8px;&quot;&gt;INSERT&amp;nbsp; &amp;nbsp; SELECT&lt;/font&gt;">
+          <mxGeometry relative="1" x="0.1104" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="784.31" y="408.48" />
+              <mxPoint x="784.31" y="395.03" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="acibox" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;dashed=1;strokeColor=#9673A6;fontSize=11;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="aibox" value="telemetria">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="693.5" y="575" />
+              <mxPoint x="1116" y="575" />
+              <mxPoint x="1116" y="328.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="1" source="acibox" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;dashed=1;strokeColor=#9673A6;fontSize=11;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" target="monitorbox" value="métricas">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="638.52" y="205.52" />
+              <mxPoint x="1240.03" y="205.52" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="1" source="aibox" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;dashed=1;strokeColor=#9673A6;" target="lawbox">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" edge="1" parent="1" source="mysqlbox" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;strokeColor=#333333;fontSize=11;" target="saidabox" value="previsões">
+          <mxGeometry relative="1" x="0.4527" y="9" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="1090" y="408" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="iIw1Ccr5y6IMF8P8ojWI-3" parent="1" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/other/Azure_Cloud_Shell.svg;" value="" vertex="1">
+          <mxGeometry height="32" width="46.1" x="49.55" y="141.5" as="geometry" />
+        </mxCell>
+        <mxCell id="iIw1Ccr5y6IMF8P8ojWI-4" parent="1" style="sketch=0;pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=none;fillColor=#505050;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;outlineConnect=0;align=center;shape=mxgraph.office.services.excel_services;" value="" vertex="1">
+          <mxGeometry height="30" width="35" x="53.3" y="332.5" as="geometry" />
+        </mxCell>
+        <mxCell id="iIw1Ccr5y6IMF8P8ojWI-5" parent="1" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/ai_machine_learning/Cognitive_Services.svg;" value="" vertex="1">
+          <mxGeometry height="30" width="42.5" x="51.349999999999994" y="503" as="geometry" />
+        </mxCell>
+        <mxCell id="iIw1Ccr5y6IMF8P8ojWI-7" parent="1" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/storage/Storage_Accounts.svg;" value="" vertex="1">
+          <mxGeometry height="34" width="42.5" x="366.25" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="iIw1Ccr5y6IMF8P8ojWI-8" parent="1" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/containers/Container_Registries.svg;" value="" vertex="1">
+          <mxGeometry height="55" width="61.31" x="343" y="579" as="geometry" />
+        </mxCell>
+        <mxCell id="iIw1Ccr5y6IMF8P8ojWI-9" parent="1" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/compute/Container_Instances.svg;" value="" vertex="1">
+          <mxGeometry height="41" width="38.59" x="540" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="iIw1Ccr5y6IMF8P8ojWI-10" parent="1" style="image;sketch=0;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/mscae/Docker.svg;" value="" vertex="1">
+          <mxGeometry height="41" width="50" x="613.5" y="341" as="geometry" />
+        </mxCell>
+        <mxCell id="iIw1Ccr5y6IMF8P8ojWI-11" parent="1" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/networking/Subnet.svg;" value="" vertex="1">
+          <mxGeometry height="19.16" width="32" x="574" y="233.76000000000002" as="geometry" />
+        </mxCell>
+        <mxCell id="iIw1Ccr5y6IMF8P8ojWI-12" parent="1" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/networking/Subnet.svg;" value="" vertex="1">
+          <mxGeometry height="19.16" width="32" x="880" y="233.76" as="geometry" />
+        </mxCell>
+        <mxCell id="iIw1Ccr5y6IMF8P8ojWI-13" parent="1" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/general/Resource_Groups.svg;" value="" vertex="1">
+          <mxGeometry height="30" width="31.88" x="278.12" y="101" as="geometry" />
+        </mxCell>
+        <mxCell id="iIw1Ccr5y6IMF8P8ojWI-14" parent="1" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/networking/Virtual_Networks.svg;" value="" vertex="1">
+          <mxGeometry height="20.9" width="35" x="499" y="172" as="geometry" />
+        </mxCell>
+        <mxCell id="iIw1Ccr5y6IMF8P8ojWI-15" parent="1" style="image;sketch=0;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/mscae/Azure_Database_for_MySQL_servers.svg;" value="" vertex="1">
+          <mxGeometry height="41" width="31.16" x="909.42" y="316.5" as="geometry" />
+        </mxCell>
+        <mxCell id="iIw1Ccr5y6IMF8P8ojWI-16" parent="1" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/management_governance/Monitor.svg;" value="" vertex="1">
+          <mxGeometry height="32" width="32" x="1224" y="141.50000000000003" as="geometry" />
+        </mxCell>
+        <mxCell id="iIw1Ccr5y6IMF8P8ojWI-19" parent="1" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/devops/Application_Insights.svg;" value="" vertex="1">
+          <mxGeometry height="37" width="25.84" x="1227.0800000000002" y="281.5" as="geometry" />
+        </mxCell>
+        <mxCell id="iIw1Ccr5y6IMF8P8ojWI-20" parent="1" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/analytics/Log_Analytics_Workspaces.svg;" value="" vertex="1">
+          <mxGeometry height="38.13" width="38.13" x="1224" y="431.87" as="geometry" />
+        </mxCell>
+        <mxCell id="iIw1Ccr5y6IMF8P8ojWI-22" parent="1" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/integration/SQL_Data_Warehouses.svg;" value="" vertex="1">
+          <mxGeometry height="41" width="40.37" x="1459" y="337" as="geometry" />
+        </mxCell>
+        <mxCell id="iIw1Ccr5y6IMF8P8ojWI-23" parent="1" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/general/Dashboard2.svg;" value="" vertex="1">
+          <mxGeometry height="32" width="45.33" x="1525" y="341.5" as="geometry" />
+        </mxCell>
+        <mxCell id="iIw1Ccr5y6IMF8P8ojWI-25" edge="1" parent="1" source="monitorbox" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;dashed=1;strokeColor=#9673A6;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="lawbox">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1225" y="424" as="sourcePoint" />
+            <mxPoint x="1225" y="471" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
