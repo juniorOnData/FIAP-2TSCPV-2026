@@ -1,0 +1,33 @@
+{
+	"name": "srcEstado",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorageDBurger",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "DB_ESTADO.csv",
+				"container": "stagedesenv"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "SG_ESTADO",
+				"type": "String"
+			},
+			{
+				"name": "NM_ESTADO",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

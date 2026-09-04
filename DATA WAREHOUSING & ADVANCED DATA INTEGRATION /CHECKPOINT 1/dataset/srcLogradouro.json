@@ -1,0 +1,41 @@
+{
+	"name": "srcLogradouro",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorageDBurger",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "DB_LOGRADOURO.csv",
+				"container": "stagedesenv"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "CD_LOGRADOURO",
+				"type": "String"
+			},
+			{
+				"name": "CD_BAIRRO",
+				"type": "String"
+			},
+			{
+				"name": "NM_LOGRADOURO",
+				"type": "String"
+			},
+			{
+				"name": "NR_CEP",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

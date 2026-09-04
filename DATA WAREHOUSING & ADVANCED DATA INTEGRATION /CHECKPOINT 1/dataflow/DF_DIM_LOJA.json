@@ -1,0 +1,263 @@
+{
+	"name": "DF_DIM_LOJA",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "srcLogradouro",
+						"type": "DatasetReference"
+					},
+					"name": "srcLogradouro",
+					"description": "Adicionar conjunto de dados de origem srcLogradouro"
+				},
+				{
+					"dataset": {
+						"referenceName": "srcLoja",
+						"type": "DatasetReference"
+					},
+					"name": "srcLoja",
+					"description": "Adicionar conjunto de dados de origem srcLoja"
+				},
+				{
+					"dataset": {
+						"referenceName": "srcEndLoja",
+						"type": "DatasetReference"
+					},
+					"name": "srcEndLoja",
+					"description": "Adicionar conjunto de dados de origem srcEndLoja"
+				},
+				{
+					"dataset": {
+						"referenceName": "srcBairro",
+						"type": "DatasetReference"
+					},
+					"name": "srcBairro",
+					"description": "Adicionar conjunto de dados de origem srcBairro"
+				},
+				{
+					"dataset": {
+						"referenceName": "srcCidade",
+						"type": "DatasetReference"
+					},
+					"name": "srcCidade",
+					"description": "Adicionar conjunto de dados de origem srcCidade"
+				},
+				{
+					"dataset": {
+						"referenceName": "srcEstado",
+						"type": "DatasetReference"
+					},
+					"name": "srcEstado",
+					"description": "Adicionar conjunto de dados de origem srcEstado"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTable",
+						"type": "DatasetReference"
+					},
+					"name": "sinkDimLoja"
+				}
+			],
+			"transformations": [
+				{
+					"name": "joinEndLoja"
+				},
+				{
+					"name": "joinLogradouro"
+				},
+				{
+					"name": "joinBairro"
+				},
+				{
+					"name": "joinCidade"
+				},
+				{
+					"name": "joinEstado"
+				},
+				{
+					"name": "derivedDimLoja"
+				},
+				{
+					"name": "surrogateKey"
+				},
+				{
+					"name": "selectDimLoja"
+				},
+				{
+					"name": "selectDedupe"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          CD_LOGRADOURO as string,",
+				"          CD_BAIRRO as string,",
+				"          NM_LOGRADOURO as string,",
+				"          NR_CEP as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> srcLogradouro",
+				"source(output(",
+				"          NR_LOJA as string,",
+				"          NM_LOJA as string,",
+				"          DT_INAUGURACAO as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> srcLoja",
+				"source(output(",
+				"          CD_LOJA_END as string,",
+				"          NR_LOJA as string,",
+				"          CD_LOGRADOURO as string,",
+				"          NR_END as string,",
+				"          DS_COMPLEMENTO_END as string,",
+				"          DT_INICIO as string,",
+				"          DT_TERMINO as string,",
+				"          ST_END as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> srcEndLoja",
+				"source(output(",
+				"          CD_BAIRRO as string,",
+				"          CD_CIDADE as string,",
+				"          NM_BAIRRO as string,",
+				"          NM_ZONA_BAIRRO as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> srcBairro",
+				"source(output(",
+				"          CD_CIDADE as string,",
+				"          SG_ESTADO as string,",
+				"          NM_CIDADE as string,",
+				"          CD_IBGE as string,",
+				"          NR_DDD as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> srcCidade",
+				"source(output(",
+				"          SG_ESTADO as string,",
+				"          NM_ESTADO as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> srcEstado",
+				"srcLoja, srcEndLoja join(srcLoja@NR_LOJA == srcEndLoja@NR_LOJA,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> joinEndLoja",
+				"joinEndLoja, srcLogradouro join(srcEndLoja@CD_LOGRADOURO == srcLogradouro@CD_LOGRADOURO,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> joinLogradouro",
+				"joinLogradouro, srcBairro join(srcLogradouro@CD_BAIRRO == srcBairro@CD_BAIRRO,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> joinBairro",
+				"joinBairro, srcCidade join(srcBairro@CD_CIDADE == srcCidade@CD_CIDADE,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> joinCidade",
+				"joinCidade, srcEstado join(srcCidade@SG_ESTADO == srcEstado@SG_ESTADO,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> joinEstado",
+				"joinEstado derive(DS_LOCALIZACAO = NM_BAIRRO + ' - ' + NM_CIDADE + '/' + NM_ESTADO,",
+				"          FL_LOJA_ANTIGA = iif(monthsBetween(currentTimestamp(), toTimestamp(DT_INAUGURACAO)) >= 60, 'S', 'N'),",
+				"          NM_LOJA_PADRAO = upper(trim(NM_LOJA)),",
+				"          DT_CARGA = currentTimestamp(),",
+				"          NM_ORIGEM_DADOS = 'INTEGRACAO_DBURGER',",
+				"          RM_REP_GRUPO = 'RM562679_RM563135_RM564060_RM561547_RM562987') ~> derivedDimLoja",
+				"selectDedupe keyGenerate(output(SK_LOJA as long),",
+				"     startAt: 1L,",
+				"     stepValue: 1L) ~> surrogateKey",
+				"surrogateKey select(mapColumn(",
+				"          SK_LOJA,",
+				"          NR_LOJA,",
+				"          NM_LOJA,",
+				"          DT_INAUGURACAO,",
+				"          NM_BAIRRO,",
+				"          NM_CIDADE,",
+				"          NM_ESTADO,",
+				"          DS_LOCALIZACAO,",
+				"          FL_LOJA_ANTIGA,",
+				"          NM_LOJA_PADRAO,",
+				"          DT_CARGA,",
+				"          NM_ORIGEM_DADOS,",
+				"          RM_REP_GRUPO",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectDimLoja",
+				"derivedDimLoja select(mapColumn(",
+				"          NR_LOJA = srcLoja@NR_LOJA,",
+				"          NM_LOJA,",
+				"          DT_INAUGURACAO,",
+				"          CD_LOJA_END,",
+				"          NR_LOJA = srcEndLoja@NR_LOJA,",
+				"          NR_END,",
+				"          DS_COMPLEMENTO_END,",
+				"          DT_INICIO,",
+				"          DT_TERMINO,",
+				"          ST_END,",
+				"          CD_LOGRADOURO = srcLogradouro@CD_LOGRADOURO,",
+				"          NM_LOGRADOURO,",
+				"          NR_CEP,",
+				"          CD_BAIRRO = srcBairro@CD_BAIRRO,",
+				"          NM_BAIRRO,",
+				"          NM_ZONA_BAIRRO,",
+				"          CD_CIDADE = srcCidade@CD_CIDADE,",
+				"          NM_CIDADE,",
+				"          CD_IBGE,",
+				"          NR_DDD,",
+				"          SG_ESTADO = srcEstado@SG_ESTADO,",
+				"          NM_ESTADO,",
+				"          DS_LOCALIZACAO,",
+				"          FL_LOJA_ANTIGA,",
+				"          NM_LOJA_PADRAO,",
+				"          DT_CARGA,",
+				"          NM_ORIGEM_DADOS,",
+				"          RM_REP_GRUPO",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectDedupe",
+				"selectDimLoja sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          SK_LOJA as integer,",
+				"          NR_LOJA as integer,",
+				"          NM_LOJA as string,",
+				"          DT_INAUGURACAO as date,",
+				"          NM_BAIRRO as string,",
+				"          NM_CIDADE as string,",
+				"          NM_ESTADO as string,",
+				"          DS_LOCALIZACAO as string,",
+				"          FL_LOJA_ANTIGA as string,",
+				"          NM_LOJA_PADRAO as string,",
+				"          DT_CARGA as timestamp,",
+				"          NM_ORIGEM_DADOS as string,",
+				"          RM_REP_GRUPO as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     recreate:true,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sinkDimLoja"
+			]
+		}
+	}
+}

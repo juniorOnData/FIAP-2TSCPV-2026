@@ -1,0 +1,33 @@
+{
+	"name": "DS_Blob_Stage",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorageDBurger",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"nomeTabela": {
+				"type": "string",
+				"defaultValue": "DB_ESTADO"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@{dataset().nomeTabela}.csv",
+					"type": "Expression"
+				},
+				"container": "stagedesenv"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

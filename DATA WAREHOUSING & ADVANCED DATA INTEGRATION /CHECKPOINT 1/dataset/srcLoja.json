@@ -1,0 +1,37 @@
+{
+	"name": "srcLoja",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorageDBurger",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "DB_LOJA.csv",
+				"container": "stagedesenv"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "NR_LOJA",
+				"type": "String"
+			},
+			{
+				"name": "NM_LOJA",
+				"type": "String"
+			},
+			{
+				"name": "DT_INAUGURACAO",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

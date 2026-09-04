@@ -1,0 +1,29 @@
+{
+	"name": "OracleDBurgerDataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "OracleDBurger",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"nomeTabela": {
+				"type": "string",
+				"defaultValue": "DB_ESTADO"
+			}
+		},
+		"annotations": [],
+		"type": "OracleTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": {
+				"value": "DBURGER",
+				"type": "Expression"
+			},
+			"table": {
+				"value": "@dataset().nomeTabela",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

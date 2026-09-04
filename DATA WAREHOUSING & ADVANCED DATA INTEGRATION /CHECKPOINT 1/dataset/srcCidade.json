@@ -1,0 +1,45 @@
+{
+	"name": "srcCidade",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorageDBurger",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "DB_CIDADE.csv",
+				"container": "stagedesenv"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "CD_CIDADE",
+				"type": "String"
+			},
+			{
+				"name": "SG_ESTADO",
+				"type": "String"
+			},
+			{
+				"name": "NM_CIDADE",
+				"type": "String"
+			},
+			{
+				"name": "CD_IBGE",
+				"type": "String"
+			},
+			{
+				"name": "NR_DDD",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,57 @@
+{
+	"name": "srcEndLoja",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorageDBurger",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "DB_END_LOJA.csv",
+				"container": "stagedesenv"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "CD_LOJA_END",
+				"type": "String"
+			},
+			{
+				"name": "NR_LOJA",
+				"type": "String"
+			},
+			{
+				"name": "CD_LOGRADOURO",
+				"type": "String"
+			},
+			{
+				"name": "NR_END",
+				"type": "String"
+			},
+			{
+				"name": "DS_COMPLEMENTO_END",
+				"type": "String"
+			},
+			{
+				"name": "DT_INICIO",
+				"type": "String"
+			},
+			{
+				"name": "DT_TERMINO",
+				"type": "String"
+			},
+			{
+				"name": "ST_END",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

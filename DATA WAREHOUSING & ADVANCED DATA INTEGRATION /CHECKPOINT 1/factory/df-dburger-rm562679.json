@@ -1,0 +1,15 @@
+{
+	"name": "df-dburger-rm562679",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "chilecentral",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "f2e93c27-b9e4-4852-8ba3-59ca40becfb3",
+		"tenantId": "11dbbfe2-89b8-4549-be10-cec364e59551"
+	}
+}

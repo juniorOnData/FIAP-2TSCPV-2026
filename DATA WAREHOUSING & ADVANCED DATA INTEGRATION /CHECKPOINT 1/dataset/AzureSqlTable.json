@@ -1,0 +1,74 @@
+{
+	"name": "AzureSqlTable",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabaseDBurger",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "SK_LOJA",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "NR_LOJA",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "NM_LOJA",
+				"type": "varchar"
+			},
+			{
+				"name": "DT_INAUGURACAO",
+				"type": "date"
+			},
+			{
+				"name": "NM_BAIRRO",
+				"type": "varchar"
+			},
+			{
+				"name": "NM_CIDADE",
+				"type": "varchar"
+			},
+			{
+				"name": "NM_ESTADO",
+				"type": "varchar"
+			},
+			{
+				"name": "DS_LOCALIZACAO",
+				"type": "varchar"
+			},
+			{
+				"name": "FL_LOJA_ANTIGA",
+				"type": "varchar"
+			},
+			{
+				"name": "NM_LOJA_PADRAO",
+				"type": "varchar"
+			},
+			{
+				"name": "DT_CARGA",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "NM_ORIGEM_DADOS",
+				"type": "varchar"
+			},
+			{
+				"name": "RM_REP_GRUPO",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "DB_DIM_LOJA"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

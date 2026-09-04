@@ -1,0 +1,41 @@
+{
+	"name": "srcBairro",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorageDBurger",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "DB_BAIRRO.csv",
+				"container": "stagedesenv"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "CD_BAIRRO",
+				"type": "String"
+			},
+			{
+				"name": "CD_CIDADE",
+				"type": "String"
+			},
+			{
+				"name": "NM_BAIRRO",
+				"type": "String"
+			},
+			{
+				"name": "NM_ZONA_BAIRRO",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
