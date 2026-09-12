@@ -153,14 +153,3 @@ streaming-ola/
 ```
 
 ---
-
-## Status
-
-```text
-Kafka                         ✅
-Apache Flink                  ✅
-Model Service                 ✅
-MLflow / Databricks           ✅
-Inferência em tempo real      ✅
-Pipeline ponta a ponta        ✅
-```
