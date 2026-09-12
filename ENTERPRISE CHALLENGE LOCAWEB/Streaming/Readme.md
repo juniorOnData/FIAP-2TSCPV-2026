@@ -129,27 +129,3 @@ Flink
   ↓
 Kafka
 ```
-
----
-
-## Estrutura do Projeto
-
-```text
-streaming-ola/
-│
-├── docker-compose.yml
-│
-├── flink/
-│   ├── Dockerfile
-│   └── jobs/
-│       └── ola_streaming.py
-│
-├── model-service/
-│   ├── Dockerfile
-│   ├── requirements.txt
-│   └── app.py
-│
-└── README.md
-```
-
----
