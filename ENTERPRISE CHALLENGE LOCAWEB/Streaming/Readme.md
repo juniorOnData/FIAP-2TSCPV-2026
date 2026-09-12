@@ -1,6 +1,6 @@
 # Streaming OLA - Predição de Violação de KPI
 
-Projeto de arquitetura de dados em streaming para predição de risco de violação de KPI em incidentes de TI.
+Projeto de arquitetura de dados em streaming para predição de risco de violação de KPI em incidentes.
 
 A solução utiliza **Apache Kafka**, **Apache Flink**, **FastAPI**, **MLflow**, **Databricks** e **Docker** para processar eventos em tempo real e realizar inferência com um modelo de Machine Learning.
 
