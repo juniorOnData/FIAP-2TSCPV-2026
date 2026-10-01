@@ -1,0 +1,21 @@
+{
+	"name": "DS_RAW_USGS_GEOJSON",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ADLS_CP",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "earthquakes_2024_01.geojson",
+				"folderPath": "raw/prova_usgs",
+				"fileSystem": "landing"
+			}
+		},
+		"schema": {}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

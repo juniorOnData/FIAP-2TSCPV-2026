@@ -1,0 +1,27 @@
+{
+	"name": "DS_SQL_DIM_REDE_SISMICA",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_AZURESQL_CP",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "REDE_SK",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CODIGO_REDE",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "DIM_REDE_SISMICA"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

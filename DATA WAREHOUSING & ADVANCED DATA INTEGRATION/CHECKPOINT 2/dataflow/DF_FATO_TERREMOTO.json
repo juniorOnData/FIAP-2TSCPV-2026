@@ -1,0 +1,113 @@
+{
+	"name": "DF_FATO_TERREMOTO",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DS_RAW_USGS_GEOJSON",
+						"type": "DatasetReference"
+					},
+					"name": "srcRaw"
+				},
+				{
+					"dataset": {
+						"referenceName": "DS_SQL_DIM_REDE_SISMICA",
+						"type": "DatasetReference"
+					},
+					"name": "srcDimRede"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DS_SQL_FATO_TERREMOTO",
+						"type": "DatasetReference"
+					},
+					"name": "sinkFato"
+				}
+			],
+			"transformations": [
+				{
+					"name": "flatFeatures"
+				},
+				{
+					"name": "dcEvento"
+				},
+				{
+					"name": "lkpRede"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          bbox as double[],",
+				"          features as (geometry as (coordinates as double[], type as string), id as string, properties as (alert as string, cdi as double, code as string, detail as string, dmin as double, felt as short, gap as short, ids as string, mag as double, magType as string, mmi as double, net as string, nst as short, place as string, rms as double, sig as short, sources as string, status as string, time as long, title as string, tsunami as boolean, type as string, types as string, tz as string, updated as long, url as string), type as string)[],",
+				"          metadata as (api as string, count as short, generated as long, status as short, title as string, url as string),",
+				"          type as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     documentForm: 'documentPerLine') ~> srcRaw",
+				"source(output(",
+				"          REDE_SK as integer,",
+				"          CODIGO_REDE as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> srcDimRede",
+				"srcRaw foldDown(unroll(features, features),",
+				"     mapColumn(",
+				"          features",
+				"     ),",
+				"     skipDuplicateMapInputs: false,",
+				"     skipDuplicateMapOutputs: false) ~> flatFeatures",
+				"flatFeatures derive(EVENTO_ID = toString(features.id),",
+				"          CODIGO_REDE_EVENTO = toString(features.properties.net),",
+				"          DATA_HORA_UTC = toTimestamp(toLong(features.properties.time)),",
+				"          MAGNITUDE = toDecimal(features.properties.mag, 6, 2),",
+				"          LONGITUDE = toDecimal(features.geometry.coordinates[1], 10, 6),",
+				"          LATITUDE = toDecimal(features.geometry.coordinates[2], 10, 6),",
+				"          PROFUNDIDADE_KM = toDecimal(features.geometry.coordinates[3], 10, 3),",
+				"          LOCAL_DESCRICAO = left(toString(features.properties.place), 300)) ~> dcEvento",
+				"dcEvento, srcDimRede lookup(CODIGO_REDE_EVENTO == CODIGO_REDE,",
+				"     multiple: false,",
+				"     pickup: 'any',",
+				"     broadcast: 'auto')~> lkpRede",
+				"lkpRede sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          EVENTO_SK as long,",
+				"          EVENTO_ID as string,",
+				"          REDE_SK as integer,",
+				"          DATA_HORA_UTC as timestamp,",
+				"          MAGNITUDE as decimal(6,2),",
+				"          PROFUNDIDADE_KM as decimal(10,3),",
+				"          LONGITUDE as decimal(10,6),",
+				"          LATITUDE as decimal(10,6),",
+				"          LOCAL_DESCRICAO as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          EVENTO_ID,",
+				"          REDE_SK,",
+				"          DATA_HORA_UTC,",
+				"          MAGNITUDE,",
+				"          PROFUNDIDADE_KM,",
+				"          LONGITUDE,",
+				"          LATITUDE,",
+				"          LOCAL_DESCRICAO",
+				"     )) ~> sinkFato"
+			]
+		}
+	}
+}

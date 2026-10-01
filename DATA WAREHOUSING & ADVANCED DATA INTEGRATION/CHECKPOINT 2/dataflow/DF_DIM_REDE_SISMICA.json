@@ -1,0 +1,76 @@
+{
+	"name": "DF_DIM_REDE_SISMICA",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DS_RAW_USGS_GEOJSON",
+						"type": "DatasetReference"
+					},
+					"name": "srcRaw"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DS_SQL_DIM_REDE_SISMICA",
+						"type": "DatasetReference"
+					},
+					"name": "sinkDimRede"
+				}
+			],
+			"transformations": [
+				{
+					"name": "flatFeatures"
+				},
+				{
+					"name": "dcRede"
+				},
+				{
+					"name": "aggRedes"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          bbox as double[],",
+				"          features as (geometry as (coordinates as double[], type as string), id as string, properties as (alert as string, cdi as double, code as string, detail as string, dmin as double, felt as short, gap as short, ids as string, mag as double, magType as string, mmi as double, net as string, nst as short, place as string, rms as double, sig as short, sources as string, status as string, time as long, title as string, tsunami as boolean, type as string, types as string, tz as string, updated as long, url as string), type as string)[],",
+				"          metadata as (api as string, count as short, generated as long, status as short, title as string, url as string),",
+				"          type as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     documentForm: 'documentPerLine') ~> srcRaw",
+				"srcRaw foldDown(unroll(features, features),",
+				"     mapColumn(",
+				"          features",
+				"     ),",
+				"     skipDuplicateMapInputs: false,",
+				"     skipDuplicateMapOutputs: false) ~> flatFeatures",
+				"flatFeatures derive(CODIGO_REDE = toString(features.properties.net)) ~> dcRede",
+				"dcRede aggregate(groupBy(CODIGO_REDE),",
+				"     QTD_EVENTOS = count()) ~> aggRedes",
+				"aggRedes sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          REDE_SK as integer,",
+				"          CODIGO_REDE as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     preSQLs:['DELETE FROM dbo.FATO_TERREMOTO; DELETE FROM dbo.DIM_REDE_SISMICA;'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          CODIGO_REDE",
+				"     )) ~> sinkDimRede"
+			]
+		}
+	}
+}

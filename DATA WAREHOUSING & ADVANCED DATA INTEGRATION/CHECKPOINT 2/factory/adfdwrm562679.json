@@ -1,0 +1,15 @@
+{
+	"name": "adfdwrm562679",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "chilecentral",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "1e1a33c0-4989-4395-8aa4-f8898d6610aa",
+		"tenantId": "11dbbfe2-89b8-4549-be10-cec364e59551"
+	}
+}
